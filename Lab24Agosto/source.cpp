@@ -1,29 +1,13 @@
 #include <iostream>
 #include <chrono>
-#define MAX 4
-//Asumimos que la memoria cach� tendr� como m�ximo 4 l�neas
+#define MAX 1000
+//Asumimos que la memoria caché tendrá como máximo 2 líneas
 
 using namespace std;
 
-void printmat(double a[][MAX]){
-	for (int i = 0; i < MAX; i++){
-		for (int j = 0; j < MAX; j++){
-			cout << a[i][j] << " ";
-		}
-		cout << endl;
-	}
-}
-	
-void printarr(double a[]){
-	for (int i = 0; i < MAX; i++){
-		cout << a[i] << " ";
-	}
-	cout << endl;
-}
-		
 int main() {
 	double A[MAX][MAX], x[MAX], y[MAX];
-	//Inicializaci�n de variables
+	//Inicialización de variables
 	
 	for (int i = 0; i < MAX; i++){
 		for (int j = 0; j < MAX; j++){
@@ -33,9 +17,7 @@ int main() {
 		y[i] = 0;
 	}
 	
-	printmat(A);
-	
-	std::chrono::steady_clock::time_point begin = std::chrono::steady_clock::now();
+	auto start = chrono::high_resolution_clock::now();
 	
 	//Primer Bucle
 	for (int i = 0; i < MAX; i++){
@@ -43,16 +25,15 @@ int main() {
 			y[i] += A[i][j]*x[j];
 		}
 	}
-	std::chrono::steady_clock::time_point end = std::chrono::steady_clock::now();
 	
-	 
-	auto dur = chrono::duration_cast<chrono::microseconds>(end-begin).count();
+	auto end = chrono::high_resolution_clock::now();
 	
-	cout << dur << endl;
+	chrono::duration<double> dur = end-start;
 	
-	printarr(y);
+	cout << dur.count() << endl;
 	
-	begin = std::chrono::steady_clock::now();
+	
+	start = chrono::high_resolution_clock::now();
 	
 	//Segundo Bucle
 	for (int j = 0; j < MAX; j++){
@@ -61,10 +42,9 @@ int main() {
 		}
 	}
 	
-	end = std::chrono::steady_clock::now();
+	end = chrono::high_resolution_clock::now();
 	
-	dur = chrono::duration_cast<chrono::microseconds>(end-begin).count();
-	cout << dur << endl;
+	dur = end-start;
+	cout << dur.count() << endl;
 	
-	printarr(y);
 }
