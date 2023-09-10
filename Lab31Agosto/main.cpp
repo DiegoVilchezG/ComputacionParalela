@@ -40,11 +40,6 @@ int main() {
 
 	cout << "Matrices inicializadas despues de: " << dur.count() << " segundos." << endl;
 
-	printmat(a);
-	cout << endl;
-	printmat(b);
-	cout << endl;
-
 	start = chrono::high_resolution_clock::now();
 	//Multiplicacion Tradicional
 	for (int i = 0; i < MAX; i++) {
@@ -58,7 +53,6 @@ int main() {
 
 	dur = end - start;
 
-	printmat(res);
 	cout << "Multiplicacion Tradicional: " << dur.count() << " segundos." << endl;
 	cout << endl;
 
@@ -86,7 +80,6 @@ int main() {
 	end = chrono::high_resolution_clock::now();
 
 	dur = end - start;
-	printmat(res);
 	cout << "Multiplicacion Por Bloques: " << dur.count() << " segundos." << endl;
 
 }
